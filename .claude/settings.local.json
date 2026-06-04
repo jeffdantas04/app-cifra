@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:datacifra.com)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(timeout 5)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node scripts/generate-icons.mjs)",
+      "Bash(npx cap *)",
+      "Bash(del \"C:\\\\Users\\\\jeffd\\\\App Cifra\\\\capacitor.config.js\")",
+      "Bash(node -e \"const p=require\\('./node_modules/@capacitor/cli/package.json'\\); console.log\\('cap cli:', p.version\\)\")",
+      "Bash(dir \"C:\\\\Users\\\\jeffd\\\\App Cifra\\\\capacitor.config*\")",
+      "Bash(npx vite *)",
+      "Bash(node -e \"const p = require\\('pdfjs-dist/package.json'\\); console.log\\(p.version\\)\")",
+      "Bash(npx kill-port *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174)",
+      "Bash(npm uninstall *)",
+      "WebFetch(domain:books.google.com.br)",
+      "Bash(python -c \"import sys, json; lines = sys.stdin.read\\(\\).strip\\(\\).split\\('\\\\n'\\); [print\\(json.loads\\(l\\).get\\('message', {}\\).get\\('content', ''\\)\\) for l in lines[-30:] if l]\")",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(gh auth *)",
+      "Bash(vercel --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

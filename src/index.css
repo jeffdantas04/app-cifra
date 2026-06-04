@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme CSS custom properties ──────────────────────────────────────────────
+   primary-N utilities are driven by --pN (space-separated RGB triplets).
+   This lets Tailwind opacity modifiers (bg-primary-500/50) work correctly.
+────────────────────────────────────────────────────────────────────────────── */
+
+/* ── DEFAULT (Violet / Purple) ─────────────────────────────── */
+:root {
+  --p50:  243 240 255;
+  --p100: 232 226 255;
+  --p200: 210 197 255;
+  --p300: 184 165 255;
+  --p400: 156 133 255;
+  --p500: 115  86 224;
+  --p600:  93  66 196;
+  --p700:  72  48 160;
+  --p800:  53  34 122;
+  --p900:  34  21  85;
+  --p950:  18  10  51;
+}
+
+/* ── MONO (pure grayscale) ─────────────────────────────────────────────────
+   Black to white, zero hue. Standard Tailwind light surfaces are already
+   neutral — only primary color and dark-mode surfaces need overrides.
+   p500 = rgb(60 60 60) → 11.2:1 w/ white ✓ WCAG AAA
+────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="mono"] {
+  --p50:  245 245 245;
+  --p100: 228 228 228;
+  --p200: 200 200 200;
+  --p300: 165 165 165;
+  --p400: 115 115 115;
+  --p500:  60  60  60;   /* dark gray button — 11.2:1 w/ white ✓ WCAG AAA   */
+  --p600:  40  40  40;
+  --p700:  25  25  25;
+  --p800:  15  15  15;
+  --p900:   8   8   8;
+  --p950:   3   3   3;
+}
+
+/* ── Mono dark — light grays for accents on near-black surfaces ─────────── */
+html.dark[data-theme="mono"] {
+  --p300: 195 195 195;
+  --p400: 215 215 215;
+  --p500: 210 210 210;   /* light gray — 13:1 on near-black ✓ WCAG AAA      */
+}
+
+/* ── Mono dark — pure neutral surfaces (strips Tailwind's blue-cool tint) ── */
+html.dark[data-theme="mono"] .dark\:bg-gray-950          { background-color: rgb(  8   8   8); }
+html.dark[data-theme="mono"] .dark\:bg-gray-900          { background-color: rgb( 18  18  18); }
+html.dark[data-theme="mono"] .dark\:bg-gray-800          { background-color: rgb( 30  30  30); }
+html.dark[data-theme="mono"] .dark\:bg-gray-800\/80      { background-color: rgb( 30  30  30 / 0.8); }
+html.dark[data-theme="mono"] .dark\:bg-gray-800\/50      { background-color: rgb( 30  30  30 / 0.5); }
+html.dark[data-theme="mono"] .dark\:bg-gray-700          { background-color: rgb( 50  50  50); }
+html.dark[data-theme="mono"] .dark\:bg-gray-700\/60      { background-color: rgb( 50  50  50 / 0.6); }
+html.dark[data-theme="mono"] .dark\:bg-gray-600          { background-color: rgb( 75  75  75); }
+html.dark[data-theme="mono"] .dark\:bg-gray-500          { background-color: rgb(108 108 108); }
+
+html.dark[data-theme="mono"] .dark\:border-gray-800      { border-color: rgb( 28  28  28); }
+html.dark[data-theme="mono"] .dark\:border-gray-700      { border-color: rgb( 46  46  46); }
+html.dark[data-theme="mono"] .dark\:border-gray-700\/50  { border-color: rgb( 46  46  46 / 0.5); }
+html.dark[data-theme="mono"] .dark\:border-gray-600      { border-color: rgb( 68  68  68); }
+html.dark[data-theme="mono"] .dark\:border-gray-500      { border-color: rgb( 95  95  95); }
+
+html.dark[data-theme="mono"] .dark\:active\:bg-gray-800:active { background-color: rgb( 25  25  25); }
+html.dark[data-theme="mono"] .dark\:active\:bg-gray-700:active { background-color: rgb( 44  44  44); }
+
+/* Section labels and inactive text on near-black */
+html.dark[data-theme="mono"] .dark\:text-gray-600        { color: rgb(155 155 155); }
+html.dark[data-theme="mono"] .dark\:text-gray-500        { color: rgb(180 180 180); }
+
+/* ── Mono: neutralize all hardcoded color classes ───────────────────────────
+   Overrides colors that are baked into component JSX (TagBadge, SongCard,
+   ChordDictionaryScreen filters) so the mono theme stays fully grayscale.
+────────────────────────────────────────────────────────────────────────────── */
+
+/* TagBadge + chord filter inactive — light backgrounds */
+html[data-theme="mono"] .bg-blue-100,
+html[data-theme="mono"] .bg-purple-100,
+html[data-theme="mono"] .bg-green-100,
+html[data-theme="mono"] .bg-red-100,
+html[data-theme="mono"] .bg-yellow-100,
+html[data-theme="mono"] .bg-orange-100,
+html[data-theme="mono"] .bg-pink-100,
+html[data-theme="mono"] .bg-amber-100,
+html[data-theme="mono"] .bg-blue-50,
+html[data-theme="mono"] .bg-violet-50,
+html[data-theme="mono"] .bg-orange-50,
+html[data-theme="mono"] .bg-teal-50,
+html[data-theme="mono"] .bg-amber-50,
+html[data-theme="mono"] .bg-red-50,
+html[data-theme="mono"] .bg-pink-50      { background-color: rgb(232 232 232); }
+
+/* TagBadge + chord filter inactive — light text */
+html[data-theme="mono"] .text-blue-700,
+html[data-theme="mono"] .text-purple-700,
+html[data-theme="mono"] .text-green-700,
+html[data-theme="mono"] .text-red-700,
+html[data-theme="mono"] .text-yellow-700,
+html[data-theme="mono"] .text-orange-700,
+html[data-theme="mono"] .text-pink-700,
+html[data-theme="mono"] .text-amber-700,
+html[data-theme="mono"] .text-blue-600,
+html[data-theme="mono"] .text-violet-600,
+html[data-theme="mono"] .text-orange-600,
+html[data-theme="mono"] .text-teal-600,
+html[data-theme="mono"] .text-amber-600,
+html[data-theme="mono"] .text-red-600,
+html[data-theme="mono"] .text-pink-600   { color: rgb(72 72 72); }
+
+/* Chord filter active — scoped to .chord-filters to preserve danger button red */
+html[data-theme="mono"] .chord-filters .bg-blue-500,
+html[data-theme="mono"] .chord-filters .bg-violet-500,
+html[data-theme="mono"] .chord-filters .bg-orange-500,
+html[data-theme="mono"] .chord-filters .bg-teal-500,
+html[data-theme="mono"] .chord-filters .bg-amber-500,
+html[data-theme="mono"] .chord-filters .bg-red-500,
+html[data-theme="mono"] .chord-filters .bg-pink-500  { background-color: rgb(45 45 45); }
+
+/* SongCard setlist link — light */
+html[data-theme="mono"] .text-indigo-400,
+html[data-theme="mono"] .text-indigo-500  { color: rgb(130 130 130); }
+
+/* TagBadge + chord filter inactive — dark backgrounds */
+html.dark[data-theme="mono"] .dark\:bg-blue-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-purple-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-green-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-red-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-yellow-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-orange-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-pink-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-amber-900\/40,
+html.dark[data-theme="mono"] .dark\:bg-blue-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-violet-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-orange-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-teal-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-amber-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-red-950\/50,
+html.dark[data-theme="mono"] .dark\:bg-pink-950\/50  { background-color: rgb(52 52 52); }
+
+/* TagBadge + chord filter inactive — dark text */
+html.dark[data-theme="mono"] .dark\:text-blue-300,
+html.dark[data-theme="mono"] .dark\:text-purple-300,
+html.dark[data-theme="mono"] .dark\:text-green-300,
+html.dark[data-theme="mono"] .dark\:text-red-300,
+html.dark[data-theme="mono"] .dark\:text-yellow-300,
+html.dark[data-theme="mono"] .dark\:text-orange-300,
+html.dark[data-theme="mono"] .dark\:text-pink-300,
+html.dark[data-theme="mono"] .dark\:text-amber-300,
+html.dark[data-theme="mono"] .dark\:text-blue-400,
+html.dark[data-theme="mono"] .dark\:text-violet-400,
+html.dark[data-theme="mono"] .dark\:text-orange-400,
+html.dark[data-theme="mono"] .dark\:text-teal-400,
+html.dark[data-theme="mono"] .dark\:text-amber-400,
+html.dark[data-theme="mono"] .dark\:text-red-400,
+html.dark[data-theme="mono"] .dark\:text-pink-400    { color: rgb(180 180 180); }
+
+/* SongCard setlist link — dark */
+html.dark[data-theme="mono"] .dark\:text-indigo-400,
+html.dark[data-theme="mono"] .dark\:text-indigo-500  { color: rgb(155 155 155); }
+
+/* ── Base layout ──────────────────────────────────────────── */
+@layer base {
+  html, body {
+    @apply h-full;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #root {
+    @apply h-full;
+  }
+}
+
+/* ── Utilities ────────────────────────────────────────────── */
+@layer utilities {
+  .chord {
+    @apply text-primary-500 font-bold;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+

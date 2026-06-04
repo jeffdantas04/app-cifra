@@ -1,0 +1,15 @@
+{
+  "appId": "com.appcifra.app",
+  "appName": "App Cifra",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "minSdkVersion": 22
+  },
+  "ios": {
+    "deploymentTarget": "13.0",
+    "contentInset": "automatic"
+  }
+}

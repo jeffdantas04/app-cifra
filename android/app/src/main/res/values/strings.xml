@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">App Cifra</string>
+    <string name="title_activity_main">App Cifra</string>
+    <string name="package_name">com.appcifra.app</string>
+    <string name="custom_url_scheme">com.appcifra.app</string>
+</resources>

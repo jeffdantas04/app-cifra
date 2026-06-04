@@ -12,7 +12,7 @@ import ChordDictionaryScreen from './screens/ChordDictionaryScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
 export default function App() {
-  const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
+  const [darkMode, setDarkMode] = useLocalStorage('darkMode', true);
   const [theme,    setTheme]    = useLocalStorage('theme', 'default');
   const [songs, setSongs] = useLocalStorage('songs', INITIAL_SONGS);
   const [setlists, setSetlists] = useLocalStorage('setlists', INITIAL_SETLISTS);
@@ -194,6 +194,7 @@ export default function App() {
             onGoToLibrary={() => setActiveTab('library')}
             onGoToSetlists={() => { setOpenSetlistId(null); setActiveTab('setlists'); }}
             onSelectSetlist={(id) => { setOpenSetlistId(id); setActiveTab('setlists'); }}
+            onCreateSetlist={handleCreateSetlist}
             darkMode={darkMode}
             onToggleDarkMode={() => setDarkMode(d => !d)}
           />

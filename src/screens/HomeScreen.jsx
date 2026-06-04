@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Plus, ChevronRight, Music2, ListMusic, Sun, Moon } from 'lucide-react';
+import { Plus, ChevronRight, Music2, ListMusic, Sun, Moon, X } from 'lucide-react';
 import { getYouTubeThumbnail } from '../utils/youtube';
 
 function greeting() {
@@ -17,9 +17,20 @@ export default function HomeScreen({
   onGoToLibrary,
   onGoToSetlists,
   onSelectSetlist,
+  onCreateSetlist,
   darkMode,
   onToggleDarkMode,
 }) {
+  const [showCreate, setShowCreate] = useState(false);
+  const [newName, setNewName]       = useState('');
+
+  const handleCreate = () => {
+    if (!newName.trim()) return;
+    onCreateSetlist(newName.trim());
+    setNewName('');
+    setShowCreate(false);
+  };
+
   const recentSongs = useMemo(
     () => [...songs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 8),
     [songs]
@@ -106,7 +117,7 @@ export default function HomeScreen({
 
             {/* Novo setlist */}
             <button
-              onClick={onGoToSetlists}
+              onClick={() => setShowCreate(true)}
               className="flex-shrink-0 w-44 rounded-2xl p-4 text-left
                          border-2 border-dashed border-gray-200 dark:border-gray-700
                          flex flex-col items-center justify-center gap-1.5
@@ -173,6 +184,47 @@ export default function HomeScreen({
       )}
 
       <div className="h-6" />
+
+      {/* ── Modal: novo setlist ────────────────────────────────────────────── */}
+      {showCreate && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4"
+             onClick={() => { setShowCreate(false); setNewName(''); }}>
+          <div className="w-full max-w-sm bg-white dark:bg-gray-900 rounded-2xl p-5 shadow-2xl"
+               onClick={e => e.stopPropagation()}>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-3">Novo Setlist</h3>
+            <input
+              autoFocus
+              type="text"
+              value={newName}
+              onChange={e => setNewName(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleCreate()}
+              placeholder="Nome do setlist"
+              className="w-full px-3 py-2.5 rounded-xl text-sm
+                         bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white
+                         border border-transparent focus:outline-none focus:border-primary-400
+                         mb-4"
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={() => { setShowCreate(false); setNewName(''); }}
+                className="flex-1 py-2.5 rounded-xl text-sm font-medium
+                           bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleCreate}
+                disabled={!newName.trim()}
+                className="flex-1 py-2.5 rounded-xl text-sm font-medium
+                           bg-primary-500 text-white active:bg-primary-600
+                           disabled:opacity-40"
+              >
+                Criar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
